@@ -9,9 +9,8 @@ const posts = [];
 
 const server = express();
 // to enable parsing of json bodies for post requests
-// server.use(express.json());
+server.use(express.json());
 
 // TODO: your code to handle requests
-
 
 module.exports = { posts, server };
