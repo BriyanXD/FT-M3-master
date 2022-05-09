@@ -27,3 +27,25 @@ var beatles = [
       "http://cp91279.biography.com/BIO_Bio-Shorts_0_Ringo-Starr_SF_HD_768x432-16x9.jpg",
   },
 ];
+
+http
+  .createServer((req, res) => {
+    if (req.url === "/api" || req.url === "/api/") {
+      res.writeHead(200, { "Content-type": "application/json" });
+      res.end(JSON.stringify(beatles));
+    }
+    if (req.url.substring(0, 5) === "/api/" && req.url.length > 5) {
+      let findBeatle = req.url.split("/").pop();
+      let foundBeatle = beatles.find(
+        (element) => findBeatle === encodeURI(element.name)
+      );
+      if (foundBeatle) {
+        res.writeHead(200, { "Content-type": "application/json" });
+        res.end(JSON.stringify(foundBeatle));
+      } else {
+        res.writeHead(404, { "Content-type": "text/plain" });
+        res.end("Error 404");
+      }
+    }
+  })
+  .listen(3000, "127.0.0.1");
