@@ -1,4 +1,3 @@
-const e = require("express");
 const { server, posts } = require("./server.js");
 
 let id = 0;
@@ -75,7 +74,7 @@ server.get("/posts/:author", (req, res) => {
 
 server.get("/posts/:author/:title", (req, res) => {
   const { author, title } = req.params;
-  if ((author, title)) {
+  if (author && title) {
     let results = posts.filter((element) => {
       if (element.author === author) return element;
       if (element.title === title) return element;
@@ -90,7 +89,7 @@ server.get("/posts/:author/:title", (req, res) => {
 
 server.put("/posts", (req, res) => {
   const { id, title, author, contents } = req.body;
-  if ((id, title, author, contents)) {
+  if (id && title && author && contents) {
     for (let i in posts) {
       if (posts[i].id === id) {
         posts[i].title = title;
